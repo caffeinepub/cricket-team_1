@@ -1,0 +1,162 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ─── Fonts ──────────────────────────────────────────────── */
+@font-face {
+  font-family: "Bricolage Grotesque";
+  src: url("/assets/fonts/BricolageGrotesque-Variable.woff2") format("woff2");
+  font-weight: 100 900;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "General Sans";
+  src: url("/assets/fonts/GeneralSans-Variable.woff2") format("woff2");
+  font-weight: 100 700;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Cabinet Grotesk";
+  src: url("/assets/fonts/CabinetGrotesk-Variable.woff2") format("woff2");
+  font-weight: 100 900;
+  font-display: swap;
+}
+
+/* ─── Design Tokens ──────────────────────────────────────── */
+@layer base {
+  :root {
+    --radius: 0.375rem;
+
+    /* Background: near-black with electric lime undertone */
+    --background: 0.08 0.018 128;
+    --foreground: 0.95 0.01 90;
+
+    /* Cards: dark charcoal-lime */
+    --card: 0.13 0.03 128;
+    --card-foreground: 0.95 0.01 90;
+
+    --popover: 0.13 0.03 128;
+    --popover-foreground: 0.95 0.01 90;
+
+    /* Primary: vivid electric lime-green */
+    --primary: 0.75 0.26 128;
+    --primary-foreground: 0.08 0.018 128;
+
+    /* Secondary: dark surface with lime undertone */
+    --secondary: 0.18 0.05 128;
+    --secondary-foreground: 0.85 0.02 90;
+
+    --muted: 0.17 0.03 128;
+    --muted-foreground: 0.55 0.05 128;
+
+    /* Accent: bright electric lime */
+    --accent: 0.78 0.24 128;
+    --accent-foreground: 0.08 0.018 128;
+
+    --destructive: 0.52 0.22 27;
+    --destructive-foreground: 0.97 0.01 90;
+
+    --border: 0.22 0.06 128;
+    --input: 0.20 0.05 128;
+    --ring: 0.75 0.26 128;
+
+    --chart-1: 0.75 0.26 128;
+    --chart-2: 0.88 0.20 128;
+    --chart-3: 0.65 0.24 128;
+    --chart-4: 0.58 0.22 128;
+    --chart-5: 0.82 0.22 128;
+
+    --sidebar: 0.12 0.03 128;
+    --sidebar-foreground: 0.92 0.02 90;
+    --sidebar-primary: 0.75 0.26 128;
+    --sidebar-primary-foreground: 0.08 0.018 128;
+    --sidebar-accent: 0.18 0.05 128;
+    --sidebar-accent-foreground: 0.92 0.02 90;
+    --sidebar-border: 0.22 0.06 128;
+    --sidebar-ring: 0.75 0.26 128;
+  }
+
+  * {
+    @apply border-border;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+    font-family: "General Sans", sans-serif;
+    -webkit-font-smoothing: antialiased;
+  }
+}
+
+@layer utilities {
+  .font-display {
+    font-family: "Cabinet Grotesk", "Bricolage Grotesque", sans-serif;
+  }
+
+  .text-balance {
+    text-wrap: balance;
+  }
+
+  /* Electric lime glow */
+  .green-glow {
+    box-shadow: 0 0 40px oklch(0.65 0.24 128 / 0.35), 0 0 80px oklch(0.50 0.20 128 / 0.2);
+  }
+
+  /* Lime accent glow (replaces red-glow) */
+  .red-glow {
+    box-shadow: 0 0 20px oklch(0.75 0.26 128 / 0.4);
+  }
+
+  /* Bright lime shimmer text */
+  .text-gold {
+    color: oklch(0.88 0.22 128);
+  }
+
+  /* Grain texture overlay */
+  .grain-overlay::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+    pointer-events: none;
+    opacity: 0.5;
+    mix-blend-mode: overlay;
+    border-radius: inherit;
+  }
+
+  /* Field line decoration */
+  .field-line {
+    position: relative;
+  }
+  .field-line::before {
+    content: "";
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background: oklch(0.68 0.24 128);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.3s ease;
+  }
+  .field-line:hover::before {
+    transform: scaleX(1);
+  }
+
+  /* Player photo hover effect */
+  .player-photo-wrapper {
+    overflow: hidden;
+  }
+  .player-photo-wrapper img {
+    transition: transform 0.4s ease;
+  }
+  .player-photo-wrapper:hover img {
+    transform: scale(1.05);
+  }
+}
